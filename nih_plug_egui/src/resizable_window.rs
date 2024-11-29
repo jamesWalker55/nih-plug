@@ -4,7 +4,7 @@
 
 use crate::egui::{pos2, CentralPanel, Context, Id, Rect, Response, Sense, Ui, Vec2};
 use crate::EguiState;
-use egui_baseview::egui::InnerResponse;
+use egui_baseview::egui::{InnerResponse, UiBuilder};
 
 /// Adds a corner to the plugin window that can be dragged in order to resize it.
 /// Resizing happens through plugin API, hence a custom implementation is needed.
@@ -36,7 +36,8 @@ impl ResizableWindow {
     ) -> InnerResponse<R> {
         CentralPanel::default().show(context, move |ui| {
             let ui_rect = ui.clip_rect();
-            let mut content_ui = ui.child_ui(ui_rect, *ui.layout());
+            let mut content_ui =
+                ui.new_child(UiBuilder::new().max_rect(ui_rect).layout(*ui.layout()));
 
             let ret = add_contents(&mut content_ui);
 

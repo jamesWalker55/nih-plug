@@ -9,6 +9,7 @@ use baseview::{Size, WindowHandle, WindowOpenOptions, WindowScalePolicy};
 use crossbeam::atomic::AtomicCell;
 use egui_baseview::egui::Context;
 use egui_baseview::EguiWindow;
+use egui_baseview::GraphicsConfig;
 use nih_plug::prelude::{Editor, GuiContext, ParamSetter, ParentWindowHandle};
 use parking_lot::RwLock;
 use raw_window_handle::{HasRawWindowHandle, RawWindowHandle};
@@ -101,6 +102,7 @@ where
                     ..Default::default()
                 }),
             },
+            GraphicsConfig::default(),
             state,
             move |egui_ctx, _queue, state| build(egui_ctx, &mut state.write()),
             move |egui_ctx, queue, state| {
